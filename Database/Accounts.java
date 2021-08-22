@@ -1,6 +1,6 @@
 package Database;
 
-public class Accounts extends User{
+public class Accounts {
 
 	public double balance;
 
@@ -17,7 +17,12 @@ public class Accounts extends User{
 	}
 
 	public void withdrawMoney(int amount) {
-		balance = getBalance() - amount;
+		if ((getBalance() - amount) < 0) {
+			;
+		} else if ((getBalance() - amount >= 0)) {
+			balance = getBalance() - amount;
+		}
+
 	}
 
 }
