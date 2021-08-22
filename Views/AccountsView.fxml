@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AccountsViewController">
+   <top>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Chequing">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="400.0">
+                     <children>
+                        <Button fx:id="LogOutButton" layoutX="687.0" layoutY="519.0" mnemonicParsing="false" onAction="#LogOut" text="Log Out">
+                           <font>
+                              <Font name="Times New Roman" size="21.0" />
+                           </font>
+                        </Button>
+                        <HBox layoutX="563.0" layoutY="8.0" prefHeight="19.0" prefWidth="232.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="UsernameLabel" prefHeight="12.0" prefWidth="140.0" text=" ">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label fx:id="ChequingOutput" layoutX="14.0" layoutY="527.0" prefHeight="23.0" prefWidth="620.0" text=" ">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="571.0" prefWidth="234.0">
+                           <children>
+                              <VBox alignment="CENTER" fillWidth="false" prefHeight="285.5" prefWidth="234.0" spacing="25.0">
+                                 <children>
+                                    <Label text="Deposit Money: ">
+                                       <font>
+                                          <Font name="Times New Roman" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="29.0" prefWidth="170.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$" wrappingWidth="12.5">
+                                             <font>
+                                                <Font name="Times New Roman" size="25.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="DepositMoneyInputChequing" onAction="#DepositButtonClickedChequing" prefHeight="25.0" prefWidth="146.0">
+                                             <font>
+                                                <Font name="Times New Roman" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="DepositButtonChequing" mnemonicParsing="false" onAction="#DepositButtonClickedChequing" prefHeight="52.0" prefWidth="148.0" text="Deposit">
+                                       <font>
+                                          <Font name="Times New Roman" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="285.5" prefWidth="234.0" spacing="25.0">
+                                 <children>
+                                    <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdraw Money:">
+                                       <font>
+                                          <Font name="Times New Roman" size="22.0" />
+                                       </font>
+                                    </Text>
+                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="29.0" prefWidth="170.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+                                             <font>
+                                                <Font name="Times New Roman" size="25.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="WithdrawMoneyInputChequing" onAction="#WithdrawButtonClickedChequing" prefHeight="25.0" prefWidth="146.0">
+                                             <font>
+                                                <Font name="Times New Roman" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="WithdrawButtonChequing" mnemonicParsing="false" onAction="#WithdrawButtonClickedChequing" prefHeight="52.0" prefWidth="148.0" text="Withdraw">
+                                       <font>
+                                          <Font name="Times New Roman" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" layoutX="234.0" layoutY="236.0" prefHeight="76.0" prefWidth="566.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$" wrappingWidth="34.0">
+                                 <font>
+                                    <Font name="Times New Roman" size="75.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="ChequingAccountBalanceLabel" prefHeight="91.0" prefWidth="399.0">
+                                 <font>
+                                    <Font name="Times New Roman" size="80.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="Bills" mnemonicParsing="false" onAction="#BillsButtonClicked" prefHeight="96.0" prefWidth="136.0" text="Bills">
+                                 <font>
+                                    <Font name="Times New Roman" size="25.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Savings">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="LogOutButton2" layoutX="687.0" layoutY="519.0" mnemonicParsing="false" onAction="#LogOut" text="Log Out">
+                           <font>
+                              <Font name="Times New Roman" size="21.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="SavingsOutput" layoutX="14.0" layoutY="527.0" prefHeight="23.0" prefWidth="644.0">
+                           <font>
+                              <Font name="Times New Roman Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="563.0" layoutY="8.0" prefHeight="19.0" prefWidth="232.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="UsernameLabel2" prefHeight="12.0" prefWidth="140.0" text=" ">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="571.0" prefWidth="234.0">
+                           <children>
+                              <VBox alignment="CENTER" fillWidth="false" prefHeight="285.5" prefWidth="234.0" spacing="25.0">
+                                 <children>
+                                    <Label text="Deposit Money: ">
+                                       <font>
+                                          <Font name="Times New Roman" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="29.0" prefWidth="170.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+                                             <font>
+                                                <Font name="Times New Roman" size="25.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="DepositMoneyInputSavings" onAction="#DepositButtonClickedSavings" prefHeight="25.0" prefWidth="146.0">
+                                             <font>
+                                                <Font name="Times New Roman" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="DepositButtonSavings" mnemonicParsing="false" onAction="#DepositButtonClickedSavings" prefHeight="52.0" prefWidth="148.0" text="Deposit">
+                                       <font>
+                                          <Font name="Times New Roman" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" fillWidth="false" prefHeight="285.5" prefWidth="234.0" spacing="25.0">
+                                 <children>
+                                    <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Withdraw Money:">
+                                       <font>
+                                          <Font name="Times New Roman" size="22.0" />
+                                       </font>
+                                    </Text>
+                                    <HBox alignment="CENTER" prefHeight="29.0" prefWidth="170.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+                                             <font>
+                                                <Font name="Times New Roman" size="25.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="WithdrawMoneyInputSavings" onAction="#WithdrawButtonClickedSavings" prefHeight="25.0" prefWidth="146.0">
+                                             <font>
+                                                <Font name="Times New Roman" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="WithdrawButtonSavings" mnemonicParsing="false" onAction="#WithdrawButtonClickedSavings" prefHeight="52.0" prefWidth="148.0" text="Withdraw">
+                                       <font>
+                                          <Font name="Times New Roman" size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" layoutX="234.0" layoutY="236.0" prefHeight="76.0" prefWidth="566.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$" wrappingWidth="34.0">
+                                 <font>
+                                    <Font name="Times New Roman" size="75.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="SavingsAccountBalanceLabel1" prefHeight="91.0" prefWidth="533.0">
+                                 <font>
+                                    <Font name="Times New Roman" size="80.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="TFSA">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="LogOutButton3" layoutX="687.0" layoutY="519.0" mnemonicParsing="false" onAction="#LogOut" text="Log Out">
+                           <font>
+                              <Font name="Times New Roman" size="21.0" />
+                           </font>
+                        </Button>
+                        <Text layoutX="362.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TFSA">
+                           <font>
+                              <Font name="Times New Roman Bold" size="30.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="178.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our Tax Free Savings Account Portfolio selection. In this tab, you will be able to select either a low risk or a high risk portfolio." textAlignment="CENTER" wrappingWidth="445.0">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="LowRiskButton" layoutX="136.0" layoutY="269.0" mnemonicParsing="false" onAction="#LowRiskButtonClicked" prefHeight="34.0" prefWidth="84.0" text="Low Risk">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="HighRiskButton" layoutX="580.0" layoutY="269.0" mnemonicParsing="false" onAction="#HighRiskButtonClicked" prefHeight="34.0" prefWidth="86.0" text="High Risk">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Button>
+                        <Text layoutX="14.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A Low Risk portfolio will utilize 2.5%-10% of your TFSA balance for investments" textAlignment="CENTER" wrappingWidth="371.619140625">
+                           <font>
+                              <Font name="Times New Roman Italic" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="408.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A High Risk portfolio will utilize 12%-24% of your TFSA balance for investments" textAlignment="CENTER" wrappingWidth="391.619140625">
+                           <font>
+                              <Font name="Times New Roman Italic" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </top>
+</BorderPane>
