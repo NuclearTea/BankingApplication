@@ -2,7 +2,7 @@ package Database;
 
 import java.util.*;
 
-public class Bill extends User{
+public class Bill {
 	String Billname;
 	double Billcost;
 	double BillFrequency;
