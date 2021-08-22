@@ -1,8 +1,8 @@
 package Database;
 
-public class Accounts {
+public class Accounts extends User{
 
-	private final double balance;
+	public double balance;
 
 	public Accounts(double balance) {
 		this.balance = balance;
@@ -13,14 +13,11 @@ public class Accounts {
 	}
 
 	public void depositMoney(int amount) {
-		newBalance(getBalance() + amount);
-	}
-
-	protected void newBalance(double d) {
+		balance = getBalance() + amount;
 	}
 
 	public void withdrawMoney(int amount) {
-		newBalance(getBalance() - amount);
+		balance = getBalance() - amount;
 	}
-	
+
 }
