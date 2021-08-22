@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HighRiskViewController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <Text layoutX="271.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Risk TFSA" textAlignment="CENTER" wrappingWidth="258.13671875">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="216.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have chosen a High Risk TFSA portfolio" textAlignment="CENTER" wrappingWidth="368.13671875">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="HighRiskDepositInput" layoutX="67.0" layoutY="183.0" onAction="#HighRiskDepositButtonClicked" prefHeight="33.0" prefWidth="149.0" />
+            <Text layoutX="67.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deposit Money:" textAlignment="CENTER" wrappingWidth="148.5078125">
+               <font>
+                  <Font name="Times New Roman" size="22.0" />
+               </font>
+            </Text>
+            <Button fx:id="HighRiskDepositButton" layoutX="67.0" layoutY="230.0" mnemonicParsing="false" onAction="#HighRiskDepositButtonClicked" prefHeight="33.0" prefWidth="149.0" text="Enter">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font></Button>
+            <Text layoutX="49.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+               <font>
+                  <Font name="Times New Roman" size="22.0" />
+               </font>
+            </Text>
+            <HBox layoutY="300.0" prefHeight="100.0" prefWidth="800.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="270.0">
+                     <children>
+                        <Button fx:id="LowestInvestmentOptionButton" disable="true" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#LowInvestmentButtonClicked" prefHeight="79.0" prefWidth="149.0">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                        <Button fx:id="MiddleInvestmentOptionButton" disable="true" layoutX="76.0" layoutY="11.0" mnemonicParsing="false" onAction="#MiddleInvestmentButtonClicked" prefHeight="79.0" prefWidth="149.0">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="100.0" prefWidth="230.0">
+                     <children>
+                        <Button fx:id="HighInvestmentOptionButton" disable="true" layoutX="67.0" layoutY="11.0" mnemonicParsing="false" onAction="#HighInvestmentButtonClicked" prefHeight="79.0" prefWidth="149.0">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Label fx:id="InvestmentOptionOutput" layoutX="8.0" layoutY="554.0" prefHeight="30.0" prefWidth="594.0">
+               <font>
+                  <Font name="Times New Roman Italic" size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="GoBackButton" layoutX="678.0" layoutY="551.0" mnemonicParsing="false" onAction="#GoBackButtonClicked" prefHeight="33.0" prefWidth="108.0" text="Go Back">
+               <font>
+                  <Font name="Times New Roman" size="19.0" />
+               </font>
+            </Button>
+            <HBox layoutX="287.0" layoutY="180.0" prefHeight="100.0" prefWidth="499.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="60.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$" wrappingWidth="45.13671875">
+                           <font>
+                              <Font name="Times New Roman" size="80.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="100.0" prefWidth="439.0">
+                     <children>
+                        <Label fx:id="HighRiskTFSABalance" layoutY="14.0" prefHeight="91.0" prefWidth="439.0">
+                           <font>
+                              <Font name="Times New Roman" size="80.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
