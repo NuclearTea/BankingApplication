@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillViewController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bills" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="40.0" />
+         </font>
+      </Text>
+   </top>
+   <left>
+      <VBox prefHeight="555.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="60.0" prefWidth="400.0">
+               <children>
+                  <Text layoutX="133.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create A Bill">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="257.0">
+                     <children>
+                        <Text layoutX="63.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of Bill:">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="100.0" prefWidth="243.0">
+                     <children>
+                        <TextField fx:id="BillNameInput" layoutX="1.0" layoutY="32.0" prefHeight="37.0" prefWidth="174.0" promptText="Enter A Name">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="172.0">
+                     <children>
+                        <Text layoutX="65.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost of Bill: ">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="BillCostInput" layoutX="46.0" layoutY="32.0" prefHeight="37.0" prefWidth="109.0" promptText="Enter Cost">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Text layoutX="33.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+                           <font>
+                              <Font name="Times New Roman" size="25.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="66.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency: ">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="BillFrequencyInput" layoutX="8.0" layoutY="32.0" onAction="#SubmitButtonClicked" prefHeight="37.0" prefWidth="159.0" promptText="Enter Frequency">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="ResetButton" layoutX="50.0" layoutY="25.0" mnemonicParsing="false" onAction="#ResetButtonClicked" prefHeight="50.0" prefWidth="100.0" text="Reset">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="74.0" layoutY="37.0" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="SubmitButton" layoutX="50.0" layoutY="25.0" mnemonicParsing="false" onAction="#SubmitButtonClicked" prefHeight="50.0" prefWidth="100.0" text="Submit">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="GoBackButton" layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#GoBackButtonClicked" prefHeight="36.0" prefWidth="104.0" text="Go back">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="555.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" prefHeight="555.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="BillNameColumn" prefWidth="133.33" text="Name of Bill" />
+                <TableColumn fx:id="BillPriceColumn" prefWidth="133.33" text="\$Price" />
+                  <TableColumn fx:id="BillFrequencyColumn" prefWidth="131.0" text="Frequency" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
