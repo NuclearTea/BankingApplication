@@ -72,6 +72,19 @@ public class UserInfoViewController {
 			PasswordInput.clear();
 			UsernameInput.clear();
 		} else {
+			Accounts Chequing = new Accounts();
+			Accounts Savings = new Accounts();
+			Accounts LowRisk = new Accounts();
+			Accounts HighRisk = new Accounts();
+//			String Username_bin= "";
+//			char[] char_Username_bin = Username_bin.toCharArray();
+//			for (int i = 0; i < char_Username_bin.length; i++) {
+//				Username_bin += Integer.toBinaryString(char_Username_bin[i]);
+//			}
+//			String UserUsername = Username + Username_bin;
+			new User(Username, PasswordInput.getText(), Chequing, Savings, LowRisk, HighRisk);
+//			new User(Username, PasswordInput.getText());
+			SaveFile.CreateFile();
 			// creates a new loader
 			FXMLLoader loader = new FXMLLoader();
 			// sets the location of new loader to AccountsView
@@ -84,12 +97,15 @@ public class UserInfoViewController {
 
 			// access AccountsViewController
 			AccountsViewController accounts = loader.getController();
+			
 			// calls method to set display user name
 			accounts.setUsername(Username);
+			
 			// call method to set Chequing Balance
-			accounts.setBalanceChequing(accounts.getChequingBalance());
+			accounts.setBalanceChequing(User.Chequing.getBalance());
+			
 			// call method to set Savings Balance
-			accounts.setBalanceSavings(accounts.getSavingsBalance());
+			accounts.setBalanceSavings(User.Savings.getBalance());
 
 			// Gets the Stage information
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
