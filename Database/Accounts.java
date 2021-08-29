@@ -2,7 +2,12 @@ package Database;
 
 public class Accounts {
 
-	public double balance;
+	public double balance = 0;
+
+	public Accounts() {
+		balance = 0;
+
+	}
 
 	public Accounts(double balance) {
 		this.balance = balance;
@@ -12,15 +17,15 @@ public class Accounts {
 		return balance;
 	}
 
-	public void depositMoney(int amount) {
-		balance = getBalance() + amount;
+	public void depositMoney(double d) {
+		balance = getBalance() + d;
 	}
 
-	public void withdrawMoney(int amount) {
-		if ((getBalance() - amount) < 0) {
+	public void withdrawMoney(double d) {
+		if ((getBalance() - d) < 0) {
 			;
-		} else if ((getBalance() - amount >= 0)) {
-			balance = getBalance() - amount;
+		} else if ((getBalance() - d >= 0)) {
+			balance = getBalance() - d;
 		}
 
 	}
