@@ -3,6 +3,7 @@ package Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,13 +15,14 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Database.*;
 
-public class HighRiskViewController {
-	// static so it doesn't change between scene changes
-	static double balanceHighRisk = 0;
-	Accounts HighRisk = new Accounts(balanceHighRisk);
+public class HighRiskViewController implements Initializable {
+	// static so it doesn't change in between scenes
+	static Accounts HighRisk = new Accounts();
 
 	@FXML
 	private Button GoBackButton;
@@ -58,9 +60,9 @@ public class HighRiskViewController {
 	 * rounding to 2 decimal places
 	 **/
 	public void setTextInvestmentOptionButton() {
-		LowestInvestmentOptionButton.setText("$" + String.format("%.2f", balanceHighRisk * 0.12));
-		MiddleInvestmentOptionButton.setText("$" + String.format("%.2f", balanceHighRisk * 0.18));
-		HighInvestmentOptionButton.setText("$" + String.format("%.2f", balanceHighRisk * 0.24));
+		LowestInvestmentOptionButton.setText("$" + String.format("%.2f", HighRisk.getBalance() * 0.12));
+		MiddleInvestmentOptionButton.setText("$" + String.format("%.2f", HighRisk.getBalance() * 0.18));
+		HighInvestmentOptionButton.setText("$" + String.format("%.2f", HighRisk.getBalance() * 0.24));
 	}
 
 	/**
@@ -80,9 +82,9 @@ public class HighRiskViewController {
 			HighRiskDepositInput.clear();
 		} else {
 			// Deposit method invoked from accounts class
-			balanceHighRisk = balanceHighRisk + Double.parseDouble(HighRiskDepositInput.getText());
+			HighRisk.balance = HighRisk.getBalance() + Double.parseDouble(HighRiskDepositInput.getText());
 			// Prints current balance in High Risk
-			setBalanceHighRisk(balanceHighRisk);
+			setBalanceHighRisk(HighRisk.getBalance());
 			// Removes previous User input
 			HighRiskDepositInput.clear();
 
@@ -110,9 +112,9 @@ public class HighRiskViewController {
 		// Displays Amount used to invest
 		InvestmentOptionOutput.setText("You have invested 12 percent of your TFSA balance.");
 		// Changes the balance displayed on screen
-		setBalanceHighRisk(balanceHighRisk - balanceHighRisk * 0.12);
+		setBalanceHighRisk(HighRisk.getBalance() - HighRisk.getBalance() * 0.12);
 		// Actually changes the balance
-		balanceHighRisk = balanceHighRisk - balanceHighRisk * 0.12;
+		HighRisk.balance = HighRisk.getBalance() - HighRisk.getBalance() * 0.12;
 
 		// Resets Text in other buttons
 		// while accounting for 2 decimal places
@@ -132,9 +134,9 @@ public class HighRiskViewController {
 		// Displays Amount used to invest
 		InvestmentOptionOutput.setText("You have invested 18 percent of your TFSA balance.");
 		// Changes the balance displayed on screen
-		setBalanceHighRisk(balanceHighRisk - balanceHighRisk * 0.18);
+		setBalanceHighRisk(HighRisk.getBalance() - HighRisk.getBalance() * 0.18);
 		// Actually changes the balance
-		balanceHighRisk = balanceHighRisk - balanceHighRisk * 0.18;
+		HighRisk.balance = HighRisk.getBalance() - HighRisk.getBalance() * 0.18;
 
 		// Resets Text in other buttons
 		// while accounting for 2 decimal places
@@ -154,9 +156,9 @@ public class HighRiskViewController {
 		// Displays amount used to invest
 		InvestmentOptionOutput.setText("You have invested 24 percent of your TFSA balance.");
 		// Changes the balance displayed on screen
-		setBalanceHighRisk(balanceHighRisk - balanceHighRisk * 0.24);
+		setBalanceHighRisk(HighRisk.getBalance() - HighRisk.getBalance() * 0.24);
 		// Actually changes the balance
-		balanceHighRisk = balanceHighRisk - balanceHighRisk * 0.24;
+		HighRisk.balance = HighRisk.getBalance() - HighRisk.getBalance() * 0.24;
 
 		// Resets Text in other buttons
 		// while accounting for 2 decimal places
@@ -186,11 +188,11 @@ public class HighRiskViewController {
 		AccountsViewController accounts = loader.getController();
 
 		// sets balance to previous amounts
-		accounts.setBalanceChequing(accounts.getChequingBalance());
-		accounts.setBalanceSavings(accounts.getSavingsBalance());
+		accounts.setBalanceChequing(User.Chequing.getBalance());
+		accounts.setBalanceSavings(User.Savings.getBalance());
 
 		// sets username to previous name
-		accounts.setUsername(accounts.getUsername());
+		accounts.setUsername(User.getUsername());
 
 		// Gets the Stage information
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -229,5 +231,11 @@ public class HighRiskViewController {
 				investmentButtons[i].setDisable(false);
 			}
 		}
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		HighRiskViewController.HighRisk = User.HighRisk;
 	}
 }
