@@ -103,8 +103,8 @@ public class BillViewController implements Initializable {
 		AccountsViewController accounts = loader.getController();
 
 		// sets balance to previous amounts
-		accounts.setBalanceChequing(accounts.getChequingBalance());
-		accounts.setBalanceSavings(accounts.getSavingsBalance());
+		accounts.setBalanceChequing(User.Chequing.getBalance());
+		accounts.setBalanceSavings(User.Savings.getBalance());
 
 		// sets username to previous name
 		accounts.setUsername(AccountsViewController.Username);
