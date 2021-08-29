@@ -5,10 +5,13 @@ import Database.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,14 +20,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AccountsViewController {
-	// making them static so they dont change in between scenes
-	static double balanceChequing = 0;
-	static double balanceSavings = 0;
-	static String Username;
+public class AccountsViewController implements Initializable {
+	// Username equals previously created User's Username
+	static String Username = User.getUsername();
 
-	Accounts Chequing = new Accounts(balanceChequing);
-	Accounts Savings = new Accounts(balanceSavings);
+	// Creats Local accounts to be linked with User created in login in screen in
+	// initializable
+	static Accounts Chequing = new Accounts();
+	static Accounts Savings = new Accounts();
 
 	@FXML
 	private TextField WithdrawMoneyInputChequing;
@@ -120,42 +123,16 @@ public class AccountsViewController {
 	 * @throws IOException
 	 */
 	public void setUsername(String name) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
 
-		loader.setLocation(getClass().getResource("/Views/UserInfoView.fxml"));
-
-		Parent AccountViewScene = loader.load();
-
-		UserInfoViewController userInfo = loader.getController();
-
-		userInfo.Username = Username;
-
-		Username = name;
-
-		UsernameLabel.setText(name);
-		UsernameLabel2.setText(name);
+		UsernameLabel.setText(Username);
+		UsernameLabel2.setText(Username);
 	}
 
 	/**
 	 * Gets Username and returns string
 	 */
 	public String getUsername() {
-		Username = UsernameLabel.getText();
 		return Username;
-	}
-
-	/**
-	 * Gets Chequing Balance
-	 */
-	public double getChequingBalance() {
-		return balanceChequing;
-	}
-
-	/**
-	 * Gets Savings balance
-	 */
-	public double getSavingsBalance() {
-		return balanceSavings;
 	}
 
 	/**
@@ -173,11 +150,11 @@ public class AccountsViewController {
 		// Sets scene
 		Scene BillViewScene = new Scene(BillViewParent);
 
-		// Creats an instance of the controller so methods can be accessed
+		// Creates an instance of the controller so methods can be accessed
 		BillViewController bill = loader.getController();
 
 		// sets table view items
-		bill.tableView.setItems(bill.bill);
+		bill.tableView.setItems(BillViewController.bill);
 
 		// This line gets the stage information
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -199,10 +176,11 @@ public class AccountsViewController {
 			ChequingOutput.setText("You cannot input a negative number! Please try again.");
 			DepositMoneyInputChequing.clear();
 		} else {
-			// Deposit method invoked from Accounts class
-			balanceChequing = balanceChequing + Double.parseDouble(DepositMoneyInputChequing.getText());
-			// Prints current balance in chequing
-			setBalanceChequing(balanceChequing);
+
+			User.Chequing.depositMoney(Double.parseDouble(DepositMoneyInputChequing.getText()));
+
+			setBalanceChequing(User.Chequing.getBalance());
+
 			// Removes user previous input
 			DepositMoneyInputChequing.clear();
 		}
@@ -221,14 +199,15 @@ public class AccountsViewController {
 			WithdrawMoneyInputChequing.clear();
 		} else {
 			// Checks if you can withdraw more money than you have
-			if (balanceChequing - Double.parseDouble(WithdrawMoneyInputChequing.getText()) < 0) {
+			if (User.Chequing.getBalance() - Double.parseDouble(WithdrawMoneyInputChequing.getText()) < 0) {
 				ChequingOutput.setText("You are taking out more money than you have! Please try again.");
 				WithdrawMoneyInputChequing.clear();
 			} else {
-				// Withdraw method invoked from Accounts Class
-				balanceChequing = balanceChequing - Double.parseDouble(WithdrawMoneyInputChequing.getText());
-				// Prints current balance in chequing
-				setBalanceChequing(balanceChequing);
+
+				User.Chequing.withdrawMoney(Double.parseDouble(WithdrawMoneyInputChequing.getText()));
+
+				setBalanceChequing(User.Chequing.getBalance());
+
 				// removes user previous input
 				WithdrawMoneyInputChequing.clear();
 			}
@@ -257,7 +236,7 @@ public class AccountsViewController {
 
 	/**
 	 * Access Accounts Class from Database package and Deposits money into account
-	 * Two ways to call: First: Press Button Second: User presses enter
+	 * Two ways to call: First: Press Button, Second: User presses enter
 	 */
 	@FXML
 	void DepositButtonClickedSavings(ActionEvent event) {
@@ -267,10 +246,11 @@ public class AccountsViewController {
 			SavingsOutput.setText("You cannot input a negative number! Please try again.");
 			DepositMoneyInputSavings.clear();
 		} else {
-			// Deposit method invoked from Accounts class
-			balanceSavings = balanceSavings + Double.parseDouble(DepositMoneyInputSavings.getText());
-			// Prints current balance in savings
-			setBalanceSavings(balanceSavings);
+
+			User.Savings.depositMoney(Double.parseDouble(DepositMoneyInputSavings.getText()));
+
+			setBalanceSavings(User.Savings.getBalance());
+
 			// Removes user previous input
 			DepositMoneyInputSavings.clear();
 		}
@@ -278,7 +258,7 @@ public class AccountsViewController {
 
 	/**
 	 * Access Accounts Class from Database package and Withdraws money from account
-	 * Two ways to call: First: Press Button Second: User presses enter
+	 * Two ways to call: First: Press Button, Second: User presses enter
 	 */
 	@FXML
 	void WithdrawButtonClickedSavings(ActionEvent event) {
@@ -288,16 +268,15 @@ public class AccountsViewController {
 			SavingsOutput.setText("You cannot input a negative number! Please try again.");
 			WithdrawMoneyInputSavings.clear();
 		} else {
-			// Checks if withdrawing more money than possible
-			if (balanceSavings * 1.05 - Double.parseDouble(WithdrawMoneyInputSavings.getText()) < 0) {
+			// Checks if withdrawing more money than possible including the interest
+			if (User.Savings.getBalance() * 1.05 - Double.parseDouble(WithdrawMoneyInputSavings.getText()) < 0) {
 				SavingsOutput.setText("You are taking out more money than you have! Please try again.");
 				WithdrawMoneyInputSavings.clear();
 			} else {
-				// Withdraw method invoked from Accounts class
-				// Every time withdraw is called, add 5% interest, then withdraw
-				balanceSavings = balanceSavings * 1.05 - Double.parseDouble(WithdrawMoneyInputSavings.getText());
-				// Prints current balance in savings
-				setBalanceSavings(balanceSavings);
+				User.Savings.balance = User.Savings.getBalance() * 1.05
+						- Double.parseDouble(WithdrawMoneyInputSavings.getText());
+
+				setBalanceSavings(User.Savings.getBalance());
 				// Removes user previous input
 				WithdrawMoneyInputSavings.clear();
 				// Displays that Interest was applied
@@ -325,7 +304,7 @@ public class AccountsViewController {
 		LowRiskViewController lowRisk = loader.getController();
 
 		// sets balance to the balance inside lowRisk
-		lowRisk.setBalanceLowRisk(lowRisk.balanceLowRisk);
+		lowRisk.setBalanceLowRisk(User.LowRisk.getBalance());
 		// sets values inside buttons
 		lowRisk.setTextInvestmentOptionButton();
 
@@ -360,7 +339,7 @@ public class AccountsViewController {
 		HighRiskViewController highRisk = loader.getController();
 
 		// sets balance to the balance inside lowRisk
-		highRisk.setBalanceHighRisk(highRisk.balanceHighRisk);
+		highRisk.setBalanceHighRisk(User.HighRisk.getBalance());
 		// sets values inside buttons
 		highRisk.setTextInvestmentOptionButton();
 
@@ -374,6 +353,18 @@ public class AccountsViewController {
 		// Sets Scene and shows upon button press
 		window.setScene(LowRiskViewScene);
 		window.show();
+	}
+
+	/**
+	 * Links Accounts to user created in UserInfo initially so those accounts can be
+	 * used
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		AccountsViewController.Chequing = User.Chequing;
+		AccountsViewController.Savings = User.Savings;
+
 	}
 
 }
