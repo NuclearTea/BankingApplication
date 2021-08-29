@@ -3,6 +3,7 @@ package Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Database.*;
 import javafx.fxml.FXML;
@@ -21,10 +24,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LowRiskViewController {
-	// static so it doesnt change between scene changes
-	static double balanceLowRisk = 0;
-	Accounts LowRisk = new Accounts(balanceLowRisk);
+public class LowRiskViewController implements Initializable {
+	// static so it doesn't change between scene changes
+	static Accounts LowRisk = new Accounts();
 
 	@FXML
 	private Button GoBackButton;
@@ -67,13 +69,13 @@ public class LowRiskViewController {
 	}
 
 	/**
-	 * Appropriately changes buttons text to represent new balance values
-	 * including rounding to 2 decimal places
+	 * Appropriately changes buttons text to represent new balance values including
+	 * rounding to 2 decimal places
 	 **/
 	public void setTextInvestmentOptionButton() {
-		LowestInvestmentOptionButton.setText("$" + String.format("%.2f", balanceLowRisk * 0.025));
-		MiddleInvestmentOptionButton.setText("$" + String.format("%.2f", balanceLowRisk * 0.0625));
-		HighInvestmentOptionButton.setText("$" + String.format("%.2f", balanceLowRisk * 0.10));
+		LowestInvestmentOptionButton.setText("$" + String.format("%.2f", LowRisk.balance * 0.025));
+		MiddleInvestmentOptionButton.setText("$" + String.format("%.2f", LowRisk.balance * 0.0625));
+		HighInvestmentOptionButton.setText("$" + String.format("%.2f", LowRisk.balance * 0.10));
 	}
 
 	/**
@@ -93,9 +95,9 @@ public class LowRiskViewController {
 			LowRiskDepositInput.clear();
 		} else {
 			// Deposit method invoked from accounts class
-			balanceLowRisk = balanceLowRisk + Double.parseDouble(LowRiskDepositInput.getText());
+			LowRisk.balance = LowRisk.balance + Double.parseDouble(LowRiskDepositInput.getText());
 			// Prints current balance in Low Risk
-			setBalanceLowRisk(balanceLowRisk);
+			setBalanceLowRisk(LowRisk.balance);
 			// Removes previous User input
 			LowRiskDepositInput.clear();
 
@@ -111,19 +113,17 @@ public class LowRiskViewController {
 	}
 
 	/**
-	 * Represents an investment of 2.5 percent 
-	 * Displays text output 
-	 * Changes balance of TFSA Changes text of all 3 buttons 
-	 * appropriately based on current balance
+	 * Represents an investment of 2.5 percent Displays text output Changes balance
+	 * of TFSA Changes text of all 3 buttons appropriately based on current balance
 	 */
 	@FXML
 	void LowInvestmentButtonClicked(ActionEvent event) {
 		// Displays amount used to invest
 		InvestmentOptionOutput.setText("You have invested 2.5 percent of your TFSA balance.");
 		// Changes the balance displayed on screen
-		setBalanceLowRisk(balanceLowRisk - balanceLowRisk * 0.025);
+		setBalanceLowRisk(LowRisk.balance - LowRisk.balance * 0.025);
 		// Actually changes the balance
-		balanceLowRisk = balanceLowRisk - balanceLowRisk * 0.025;
+		LowRisk.balance = LowRisk.getBalance() - LowRisk.balance * 0.025;
 
 		// Resets text in other buttons
 		// while accounting for 2 decimal places
@@ -135,19 +135,17 @@ public class LowRiskViewController {
 	}
 
 	/**
-	 * Represents an investment of 6.25 percent 
-	 * Displays text output 
-	 * Changes balance of TFSA Changes text of all 3 buttons
-	 * appropriately based on current balance
+	 * Represents an investment of 6.25 percent Displays text output Changes balance
+	 * of TFSA Changes text of all 3 buttons appropriately based on current balance
 	 */
 	@FXML
 	void MiddleInvestmentButtonClicked(ActionEvent event) {
 		// Displays amount used to invest
 		InvestmentOptionOutput.setText("You have invested 6.25 percent of your TFSA balance");
 		// Changes the balance displayed on screen
-		setBalanceLowRisk(balanceLowRisk - balanceLowRisk * 0.0625);
+		setBalanceLowRisk(LowRisk.getBalance() - LowRisk.getBalance() * 0.0625);
 		// Actually changes the balance
-		balanceLowRisk = balanceLowRisk - balanceLowRisk * 0.0625;
+		LowRisk.balance = LowRisk.getBalance() - LowRisk.getBalance() * 0.0625;
 
 		// Resets text in other buttons
 		// while accounting for 2 decimal places
@@ -159,19 +157,17 @@ public class LowRiskViewController {
 	}
 
 	/**
-	 * Represents an investment of 10 percent 
-	 * Displays text output 
-	 * Changes balance of TFSA Changes text of all 3 buttons
-	 * appropriately based on current balance
+	 * Represents an investment of 10 percent Displays text output Changes balance
+	 * of TFSA Changes text of all 3 buttons appropriately based on current balance
 	 */
 	@FXML
 	void HighInvestmentButtonClicked(ActionEvent event) {
 		// Displays amount used to invest
 		InvestmentOptionOutput.setText("You have invested 10 percent of your TFSA balance");
 		// Changes the balance displayed on screen
-		setBalanceLowRisk(balanceLowRisk - balanceLowRisk * 0.10);
+		setBalanceLowRisk(LowRisk.getBalance() - LowRisk.getBalance() * 0.10);
 		// Actually changes the balance
-		balanceLowRisk = balanceLowRisk - balanceLowRisk * 0.10;
+		LowRisk.balance = LowRisk.getBalance() - LowRisk.getBalance() * 0.10;
 
 		// Resets text in other buttons
 		// while accounting for 2 decimal places
@@ -201,11 +197,11 @@ public class LowRiskViewController {
 		AccountsViewController accounts = loader.getController();
 
 		// sets balance to previous amounts
-		accounts.setBalanceChequing(accounts.getChequingBalance());
-		accounts.setBalanceSavings(accounts.getSavingsBalance());
+		accounts.setBalanceChequing(User.Chequing.getBalance());
+		accounts.setBalanceSavings(User.Savings.getBalance());
 
 		// sets username to previous name
-		accounts.setUsername(accounts.getUsername());
+		accounts.setUsername(User.getUsername());
 
 		// Gets the Stage information
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -236,6 +232,12 @@ public class LowRiskViewController {
 			}
 		}
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		LowRiskViewController.LowRisk = User.LowRisk;
+		
 	}
 
 }
