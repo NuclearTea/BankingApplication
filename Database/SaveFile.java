@@ -21,7 +21,7 @@ public class SaveFile {
 			File file = new File(UserTextFileName);
 			if (file.createNewFile()) {
 				System.out.println("File created:" + file.getName());
-				FileWriter writer = new FileWriter(Username);
+				FileWriter writer = new FileWriter(UserTextFileName);
 				writer.write(Username + ", " + Password + "\n");
 				writer.close();
 			} else {
@@ -57,6 +57,7 @@ public class SaveFile {
 			bw.newLine();
 			bw.write(HighRisk + ": " + HighRisk.getBalance());
 			bw.newLine();
+			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,7 +67,7 @@ public class SaveFile {
 	public static void SaveBills(String[] args) {
 		for (Bill bills : User.BillList) {
 			try {
-				FileWriter writer = new FileWriter(User.getUsername(), true);
+				FileWriter writer = new FileWriter(UserTextFileName, true);
 				BufferedWriter bw = new BufferedWriter(writer);
 				bw.write(bills.getBillname() + ", " + bills.getBillFrequency() + ", " + bills.getBillcost() + "\n");
 			} catch (IOException e) {
