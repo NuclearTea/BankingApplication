@@ -216,6 +216,7 @@ public class AccountsViewController implements Initializable {
 
 	/**
 	 * Goes back to User Info Screen
+	 * Saves Information about Accounts in User Text File
 	 */
 	@FXML
 	void LogOut(ActionEvent event) throws FileNotFoundException, IOException {
