@@ -221,6 +221,7 @@ public class AccountsViewController implements Initializable {
 	@FXML
 	void LogOut(ActionEvent event) throws FileNotFoundException, IOException {
 		SaveFile.SaveAccounts();
+		SaveFile.SaveBills();
 		FXMLLoader loader = new FXMLLoader();
 		// Access UserInfoView fxml file to set new scene
 		Parent UserInfoViewParent = (Parent) loader.load(new FileInputStream("src/Views/UserInfoView.fxml"));

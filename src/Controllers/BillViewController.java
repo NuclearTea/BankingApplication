@@ -89,6 +89,10 @@ public class BillViewController implements Initializable {
 	 */
 	@FXML
 	void GoBackButtonClicked(ActionEvent event) throws IOException {
+		for (Bill bill : tableView.getItems()) {
+			BillsArrayList.add(bill);
+		}
+		
 		// creates a new loader
 		FXMLLoader loader = new FXMLLoader();
 		// sets the location of new loader to AccountsView
@@ -119,6 +123,8 @@ public class BillViewController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		User.BillList = BillsArrayList;
 
 		// set up columns in the table
 		BillNameColumn.setCellValueFactory(new PropertyValueFactory<Bill, String>("Billname"));

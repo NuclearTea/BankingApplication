@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,15 +78,14 @@ public class UserInfoViewController {
 			Accounts Savings = new Accounts();
 			Accounts LowRisk = new Accounts();
 			Accounts HighRisk = new Accounts();
-//			String Username_bin= "";
-//			char[] char_Username_bin = Username_bin.toCharArray();
-//			for (int i = 0; i < char_Username_bin.length; i++) {
-//				Username_bin += Integer.toBinaryString(char_Username_bin[i]);
-//			}
-//			String UserUsername = Username + Username_bin;
-			new User(Username, PasswordInput.getText(), Chequing, Savings, LowRisk, HighRisk);
-//			new User(Username, PasswordInput.getText());
+			ArrayList<Bill> BillList = new ArrayList<Bill>();
+			new User(Username, PasswordInput.getText(), Chequing, Savings, LowRisk, HighRisk, BillList);
 			SaveFile.CreateFile();
+			
+			
+			
+			
+			
 			// creates a new loader
 			FXMLLoader loader = new FXMLLoader();
 			// sets the location of new loader to AccountsView

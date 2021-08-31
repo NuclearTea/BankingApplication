@@ -64,12 +64,14 @@ public class SaveFile {
 
 	}
 
-	public static void SaveBills(String[] args) {
+	public static void SaveBills() {
 		for (Bill bills : User.BillList) {
 			try {
 				FileWriter writer = new FileWriter(UserTextFileName, true);
 				BufferedWriter bw = new BufferedWriter(writer);
-				bw.write(bills.getBillname() + ", " + bills.getBillFrequency() + ", " + bills.getBillcost() + "\n");
+				bw.write(User.BillList.indexOf(bills) + ". " + bills.getBillname() + ", " + bills.getBillFrequency()
+						+ ", " + bills.getBillcost() + "\n");
+				bw.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

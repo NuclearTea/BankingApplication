@@ -16,10 +16,9 @@ public class User {
 	public static Accounts LowRisk;
 	public static Accounts HighRisk;
 	public static Bill Bill;
-	
+
 	public static ArrayList<Accounts> AccountsList;
 	public static ArrayList<Bill> BillList;
-	
 
 	public User(String Username, String Password) {
 		User.Username = Username;
@@ -31,7 +30,6 @@ public class User {
 //			AccountsList.add(accounts);
 //		}
 //	}
-	
 
 	/**
 	 * @return the bill
@@ -48,30 +46,14 @@ public class User {
 	}
 
 	public User(String Username, String Password, Accounts Chequing, Accounts Savings, Accounts LowRisk,
-			Accounts HighRisk, Bill Bill) {
+			Accounts HighRisk, ArrayList<Bill> BillList) {
 		User.Username = Username;
 		User.Password = Password;
-
-//		if (Chequing != null) {
-//			AccountsList.add(Chequing);
-//		}
-//
-//		if (HighRisk != null) {
-//			AccountsList.add(HighRisk);
-//		}
-//
-//		if (LowRisk != null) {
-//			AccountsList.add(LowRisk);
-//		}
-//
-//		if (Savings != null) {
-//			AccountsList.add(Savings);
-//		}
-//
-//		if (Bill != null) {
-//			BillList.add(Bill);	
-//		}
-
+		User.Chequing = Chequing;
+		User.Savings = Savings;
+		User.LowRisk = LowRisk;
+		User.HighRisk = HighRisk;
+		User.BillList = BillList;
 	}
 
 	public User(String Username, String Password, Accounts Chequing, Accounts Savings, Accounts LowRisk,
@@ -82,16 +64,14 @@ public class User {
 		User.Savings = Savings;
 		User.LowRisk = LowRisk;
 		User.HighRisk = HighRisk;
-//		AccountsList.add(Chequing);
-//		AccountsList.add(HighRisk);
-//		AccountsList.add(LowRisk);
-//		AccountsList.add(Savings);
+
 	}
 
 	public User(Accounts Chequing, Accounts Savings) {
 		User.Chequing = Chequing;
 		User.Savings = Savings;
 	}
+
 	/**
 	 * @return the username
 	 */
